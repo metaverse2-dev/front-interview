@@ -1,14 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Front Interview with Nextjs
+<p align='center'>
+    <img src="https://img.shields.io/badge/v18.13.0+-2C8EBB?style=for-the-badge&logo=node.js&logoColor=green" alt='Node'/>
+    <img src="https://img.shields.io/badge/Typescript-v5.1.6-2C8EBB?style=for-the-badge&logoColor=blue&logo=typescript" alt='TypeScript'/>
+    <img src="https://img.shields.io/badge/pnpm-v8.6.9-2C8EBB?style=for-the-badge&logo=pnpm&logoColor=blue" alt='PNPM'/>
+    <img src="https://img.shields.io/badge/nextjs-v13.4.19-blueviolet.svg?style=for-the-badge&logo=Next.js&labelColor=000000&logoWidth=20" alt="nextjs" />
+    <br />
+</p>
 
-## Getting Started
-
-First, run the development server:
+## 시작하기 전에
+먼저 의존성을 설치합니다.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm i
+```
+
+## 시작하기
+
+먼저 개발 서버를 실행합니다:
+
+```bash
 pnpm dev
 ```
 
@@ -22,17 +32,49 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## 폴더 구조 설명
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+public/
+|_ favicon.ico
+|_ assets/
+  |_ images/               # 이미지 파일이 들어갑니다. 파일명은 소문자와 - 로만 구성해주세요.
+  |_ icons/                # 아이콘 파일이 들어갑니다. 파일명은 소문자와 - 로만 구성해주세요.
+  |_ ...                   # 기타 파일은 폴더를 만들어 관리하며 파일명은 소문자와 - 로만 구성해주세요.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+src/                        # 개발 관련 파일들은 src 밑으로 들어갑니다.
+|_ api/                               # api들은 이 폴더에 들어갑니다.
+|_ component/                         # 컴포넌트들은 이 폴더에 들어갑니다.
+  |_ register/                        # /register/... 페이지에 관련된 파일들은 이 폴더에 들어갑니다.
+    |_ RegisterVerifyEmailForm/       # 컴포넌트 이름은 PascalCase 로 작성해주세요.
+      |_ index.tsx                    # 컴포넌트 파일은 index.tsx 로 작성해주세요.
+      |_ style.module.css             # 컴포넌트 스타일 파일은 style.module.css 로 작성해주세요.
+|_ hook/                              # 커스텀 훅들은 이 폴더에 들어갑니다.
+|_ lib/                               # lib은 이 폴더에 들어갑니다.
+|_ pages/
+  |_ login/
+    |_ index.tsx                      # 예시 1-1 /login
+  |_ register/
+    |_ index.tsx                      # 예시 1-2 /register
+    |_ verify-email.tsx               # 예시 2 /register/verify-email
+  |_ list/
+    |_ [idx].tsx                      # 예시 3 /list/1
+|_ store/                             # 상태관리는 이곳에서 합니다.
+|_ style/                             # css들은 이 폴더에 들어갑니다.
+|_ util/                              # 유틸 함수들은 이 폴더에 들어갑니다.
+```
 
-## Deploy on Vercel
+## Commit Convention
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `feat`: 새로운 기능과 관련된 것을 의미한다.
+- `fix`: 오류와 같은 것을 수정했을 때 사용한다.
+- `style`: 코드의 변화와 관련없는 포맷이나 세미콜론을 놓친 것과 같은 부분들을 의미한다.
+- `test`: test를 추가하거나 수정했을 때를 의미한다.
+- `dependency`: 코드 의존성 추가나 삭제 되었을 때 사용한다. 
+- `build`: 빌드
+- `ci`: docker 관련 ci/cd
+- `docs`: 문서와 관련하여 수정한 부분이 있을 때 사용한다. (ex) README 수정
+- `refactor`: 코드의 리팩토링을 의미한다. 
+- `revert`: git 꼬였을때 revert 커밋.
