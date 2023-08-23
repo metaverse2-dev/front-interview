@@ -37,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       const decodedToken = jwt.verify(refreshToken, secretKey) as DecodedToken;
       const userId = decodedToken.userId;
 
-      const newAccessToken = jwt.sign({ userId }, secretKey, { expiresIn: "1m" });
+      const newAccessToken = jwt.sign({ userId }, secretKey, { expiresIn: "10m" });
 
       res.status(200).json({ accessToken: newAccessToken });
     } catch (error) {

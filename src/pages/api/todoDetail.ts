@@ -13,7 +13,7 @@ type Todo = {
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const accessToken = req.headers.authorization?.split(" ")[1];
+  const accessToken = (req.headers.authorization as string)?.split(" ")[1] ?? false;
 
   if (!secretKey) {
     res.status(401).json({ message: "Unauthorized: Missing JWT secret key" });

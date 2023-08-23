@@ -17,7 +17,7 @@ interface DecodedToken extends JwtPayload {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const accessToken = req.headers.authorization?.split(" ")[1];
+  const accessToken = (req.headers.authorization as string)?.split(" ")[1] ?? false;
 
   if (!secretKey) {
     res.status(401).json({ message: "Unauthorized: Missing JWT secret key" });
@@ -41,13 +41,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       driver: sqlite3.Database,
     });
     await db.run(`
-    CREATE TABLE IF NOT EXISTS todo (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      userId TEXT,
-      title TEXT,
-      content TEXT
-    )
-  `);
+      CREATE TABLE IF NOT EXISTS todo (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userId TEXT,
+        title TEXT,
+        content TEXT
+      )
+    `);
     if (req.method === "GET") {
       // SELECT 쿼리 실행
       const todos = await db.all("SELECT * FROM todo");
