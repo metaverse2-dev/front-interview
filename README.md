@@ -66,6 +66,115 @@ src/                        # 개발 관련 파일들은 src 밑으로 들어갑
 |_ util/                              # 유틸 함수들은 이 폴더에 들어갑니다.
 ```
 
+## API Info
+[ post ]`api/login` :
+```ts
+//로그인
+type Req = {
+  email: string;
+  password: string;
+};
+
+type Res = {
+  accessToken: string;
+  refreshToken: string;
+};
+```
+[ post ]`api/renew` :
+```ts
+//Access Token 갱신
+type Req = {
+  accessToken: string;
+  refreshToken: string;
+};
+type Res = {
+  accessToken: string;
+}
+```
+[ get ]`api/todo` :
+```ts
+//Todo List
+type Req = {}; 
+
+type Res_Todo = {
+  id: number;
+  userId: string;
+  title: string;
+  content: string;
+}[];
+```
+[ post ]`api/todo` :
+```ts
+//Todo Detail
+type Req = {
+  title: string;
+  content: string;
+};
+
+//Res
+type Todo = {
+  id: number;
+  userId: string;
+  title: string;
+  content: string;
+};
+//status 400 Error
+type Res = {
+  message: string;
+}
+```
+[ put ]`api/todo` :
+```ts
+//Todo Detail
+type Req = {
+  id: number;
+  title: string;
+  content: string;
+};
+
+//status 201
+type Res = {
+  message: "Todo updated successfully"
+};
+//status 400 Error
+type Res = {
+  message: string;
+}
+
+```
+[ delete ]`api/todo` :
+```ts
+//Todo Detail
+type Req = {
+  id: number;
+}
+//status 201
+type Res = {
+  message: "Todo deleted successfully"
+};
+//status 400 Error
+type Res = {
+  message: string;
+}
+```
+[ get ]`api/todoDetail` :
+```ts
+//Todo Detail
+type Res = {
+  id: number;
+};
+
+//status 400 Error
+type Res = {
+  message: string;
+}
+```
+
+## 기술 스택
+```sh
+Axios && (Zustand || Recoil) || (React Query)
+```
+
 ## Commit Convention
 
 - `feat`: 새로운 기능과 관련된 것을 의미한다.
