@@ -60,6 +60,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
        * @param content 내용
        */
       const { title, content } = req.body;
+
+      if(!title){
+        res.status(400).json({message: "wrong param in title!"})
+      }
+      if(!content){
+        res.status(400).json({message: "wrong param in content!"})
+      }
       // INSERT 쿼리 실행
       await db.run("INSERT INTO todo (userId, title, content) VALUES (?, ?, ?)", userId, title, content);
       res.status(201).json({ message: "Todo created successfully" });
@@ -72,6 +79,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
        * @param content 내용
        */
       const { id, title, content } = req.body;
+      if(!id){
+        res.status(400).json({message: "wrong param in id!"})
+      }
+      if(!title){
+        res.status(400).json({message: "wrong param in title!"})
+      }
+      if(!content){
+        res.status(400).json({message: "wrong param in content!"})
+      }
       // UPDATE 쿼리 실행
       await db.run("UPDATE todo SET title = ?, content = ? WHERE id = ?", title, content, id);
       res.status(201).json({ message: "Todo updated successfully" });
@@ -82,6 +98,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
        * @param id 키 값
        */
       const { id } = req.query;
+      if(!id) {
+        res.status(400).json({message: "wrong param in id!"})
+      }
       // DELETE 쿼리 실행
       await db.run("DELETE FROM todo WHERE id = ? AND userId = ?", id, userId);
       res.status(201).json({ message: "Todo deleted successfully" });
