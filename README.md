@@ -51,6 +51,7 @@ src/                        # 개발 관련 파일들은 src 밑으로 들어갑
     |_ RegisterVerifyEmailForm/       # 컴포넌트 이름은 PascalCase 로 작성해주세요.
       |_ index.tsx                    # 컴포넌트 파일은 index.tsx 로 작성해주세요.
       |_ style.module.css             # 컴포넌트 스타일 파일은 style.module.css 로 작성해주세요.
+|_ constant/                          # 싱수와 Enum 들은 여기에 들어갑니다.
 |_ hook/                              # 커스텀 훅들은 이 폴더에 들어갑니다.
 |_ lib/                               # lib은 이 폴더에 들어갑니다.
 |_ pages/
@@ -160,7 +161,7 @@ type Res = {
 [ get ]`api/todoDetail` :
 ```ts
 //Todo Detail
-type Res = {
+type Req = {
   id: number;
 };
 
