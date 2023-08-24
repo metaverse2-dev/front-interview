@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     }
 
     if (!secretKey) {
-      res.status(401).json({ message: "Unauthorized: Missing JWT secret key" });
+      res.status(400).json({ message: "Unauthorized: Missing JWT secret key" });
       return;
     }
 
@@ -41,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
       res.status(200).json({ accessToken: newAccessToken });
     } catch (error) {
-      res.status(401).json({ message: "Invalid refresh token" });
+      res.status(400).json({ message: "Invalid refresh token" });
     }
   } else {
     res.status(405).end();

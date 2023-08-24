@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     try {
       if (email !== EMAIL || password !== PASSWORD) {
-        res.status(401).json({ message: "Authentication failed" });
+        res.status(400).json({ message: "Authentication failed" });
         return;
       }
 
