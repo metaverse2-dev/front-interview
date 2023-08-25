@@ -26,66 +26,68 @@ type PostTodo = {
 }
 
 type Status = { message: string; }
-export const postTodo = () => {
-  const {mutate} = useMutation([QUERY_KEY.postTodo],{
+export const postTodo = ({
+                           onError = () => {
+                           },
+                           onSuccess = () => {
+                           },
+                         }) => {
+  return useMutation([QUERY_KEY.postTodo], {
     mutationFn: async ({title, content}: PostTodo) => {
-      try {
-        const {data} = await api.post<Status>('/todo', {title, content});
-        return data;
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  })
-  return mutate;
+      const {data} = await api.post<Status>('/todo', {title, content});
+      return data;
+    },
+    onError,
+    onSuccess
+  });
 };
-type PutTodo = {
+export interface PutTodo {
   id: number;
   title: string;
   content: string;
 }
-export const putTodo = () => {
-  const {mutate} = useMutation([QUERY_KEY.putTodo],{
+export const putTodo = ({
+                          onError = () => {
+                          },
+                          onSuccess = () => {
+                          },
+                        }) => {
+  return useMutation([QUERY_KEY.putTodo], {
     mutationFn: async ({id, title, content}: PutTodo) => {
-      try {
-        const {data} = await api.put<Status>('/todo', {id, title, content});
-        return data;
-      } catch (e) {
-        console.error(e);
-      }
-    }
+      const {data} = await api.put<Status>('/todo', {id, title, content});
+      return data;
+    },
+    onError,
+    onSuccess
   });
-  return mutate;
 
 };
 type DeleteTodo = {
   id: number;
 }
-export const deleteTodo = () => {
+export const deleteTodo = ({
+                             onError = () => {
+                             },
+                             onSuccess = () => {
+                             },
+                           }) => {
 
-  const {mutate} = useMutation([QUERY_KEY.deleteTodo],{
+  return useMutation([QUERY_KEY.deleteTodo], {
     mutationFn: async ({id}: DeleteTodo) => {
-      try {
-        const {data} = await api.delete<Status>(`/todo?id=${id}`);
-        return data;
-      } catch (e) {
-        console.error(e);
-      }
-    }
+      const {data} = await api.delete<Status>(`/todo?id=${id}`);
+      return data;
+    },
+    onError,
+    onSuccess
   });
-  return mutate;
 };
 
 type GetTodoDetail = {
   id: number;
 };
 export const getTodoDetail = ({id}: GetTodoDetail) => {
-  return useQuery([QUERY_KEY.getTodo, id], async () => {
-    try {
-      const {data} = await api.get<Todo>(`/todoDetail?id=${id}`);
+  return useQuery([QUERY_KEY.getTodoDetail, id], async () => {
+      const {data}:{data:Todo} = await api.get<Todo>(`/todoDetail?id=${id}`);
       return data;
-    } catch (e) {
-      console.error(e);
-    }
   })
 };
