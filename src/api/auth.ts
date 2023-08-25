@@ -42,12 +42,8 @@ export const postRenew = ({
                           }) => {
   return useMutation([QUERY_KEY.posetRenew], {
     mutationFn: async ({accessToken, refreshToken}: PostRenew) => {
-      try {
-        const {data} = await api.post<ResRenew>('/renew', {accessToken, refreshToken});
-        return data;
-      } catch (e) {
-        console.error(e);
-      }
+      const {data} = await api.post<ResRenew>('/renew', {accessToken, refreshToken});
+      return data;
     },
     onError,
     onSuccess
